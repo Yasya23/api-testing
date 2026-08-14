@@ -38,7 +38,7 @@ export class ApiAssert {
   }
 
   static isDeepEqual<T>(actual: T, expected: T, message: string = ''): void {
-    const expectedResultMessage = `Expected ${actual} to strictly equal ${expected}. ${message}`;
+    const expectedResultMessage = `Expected ${JSON.stringify(actual)} to strictly equal ${JSON.stringify(expected)}. ${message}`;
     assert.deepStrictEqual(actual, expected, expectedResultMessage);
   }
 }
