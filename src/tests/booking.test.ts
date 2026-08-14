@@ -6,7 +6,7 @@ import { FetchClient } from '@utils/fetchClient.util';
 
 import { AuthService } from '@api/auth.service';
 import { BookingService } from '@api/booking.service';
-import { bookingData } from '@tests-data/booking.data';
+import { bookingData } from '@test-data/booking.data';
 
 describe('Restful Booker API Automated Test Suite', () => {
   let fetchClient: FetchClient;

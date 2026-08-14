@@ -1,5 +1,14 @@
 import { BookingPayload } from '@types/common';
-import { buildBookingPayload } from '@utils/buildBookinPayload.util';
+
+function buildBookingPayload(
+  bookingPayload: BookingPayload,
+  overrides: Partial<BookingPayload>,
+): BookingPayload {
+  return {
+    ...bookingPayload,
+    ...overrides,
+  };
+}
 
 const initialBookingData: BookingPayload = {
   firstname: 'Jim',

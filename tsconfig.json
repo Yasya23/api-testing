@@ -18,7 +18,7 @@
       "@types/*": ["./src/types/*.ts"],
       "@api/*": ["./src/api/*.ts"],
       "@constants/*": ["./src/constants/*.ts"],
-      "@tests-data/*": ["./src/tests-data/*.ts"]
+      "@test-data/*": ["./src/test-data/*.ts"]
     }
   },
 
