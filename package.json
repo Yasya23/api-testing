@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "start": "node --env-file=.env index.ts",
-    "test": "node --import tsx --env-file=.env --test src/**/*.test.ts"
+    "test": "node --import tsx --test src/**/*.test.ts",
+    "test:local": "node --import tsx --env-file=.env --test src/**/*.test.ts"
   },
   "devDependencies": {
     "@types/node": "^20.19.43",
