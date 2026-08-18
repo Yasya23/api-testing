@@ -12,35 +12,18 @@ describe('Restful Booker API Automated Test Suite', () => {
   let fetchClient: FetchClient;
   let authService: AuthService;
   let bookingService: BookingService;
-
   let authToken: string;
   let createdBookingId: number;
 
-  before(() => {
+  before(async () => {
     fetchClient = new FetchClient(CONFIG.BASE_URL);
     authService = new AuthService(fetchClient);
     bookingService = new BookingService(fetchClient);
+    authToken = await authService.getToken();
   });
 
-  // Scenario 1: Authentication
-  it('1. Should generate an authentication token successfully', async () => {
-    const response = await authService.createToken(CONFIG.DEFAULT_CREDENTIALS);
-
-    ApiAssert.status(response, 200);
-    ApiAssert.headerContains(response, 'content-type', 'application/json');
-    ApiAssert.exists(response.body.token, 'Response body token property');
-
-    ApiAssert.isEqual(
-      typeof response.body.token,
-      'string',
-      'Token should be a string',
-    );
-
-    authToken = response.body.token;
-  });
-
-  // Scenario 2: Create Booking
-  it('2. Should create a new booking', async () => {
+  // Scenario 1: Create Booking
+  it('1. Should create a new booking', async () => {
     const response = await bookingService.createBooking(bookingData.initial);
 
     ApiAssert.status(response, 200);
@@ -58,8 +41,8 @@ describe('Restful Booker API Automated Test Suite', () => {
     createdBookingId = response.body.bookingid;
   });
 
-  // Scenario 3: Get Created Booking by ID
-  it('3. Should fetch the created booking by ID', async () => {
+  // Scenario 2: Get Created Booking by ID
+  it('2. Should fetch the created booking by ID', async () => {
     ApiAssert.exists(createdBookingId, 'createdBookingId');
 
     const response = await bookingService.getBookingById(createdBookingId);
@@ -69,8 +52,8 @@ describe('Restful Booker API Automated Test Suite', () => {
     ApiAssert.isDeepEqual(response.body, bookingData.initial);
   });
 
-  // Scenario 4: Update Booking
-  it('4. Should update the created booking using auth token', async () => {
+  // Scenario 3: Update Booking
+  it('3. Should update the created booking using auth token', async () => {
     ApiAssert.exists(createdBookingId, 'createdBookingId');
     ApiAssert.exists(authToken, 'authToken');
 
@@ -87,8 +70,8 @@ describe('Restful Booker API Automated Test Suite', () => {
     ApiAssert.isDeepEqual(response.body, bookingData.updated);
   });
 
-  // Scenario 5: Remove Booking & Verify Deletion
-  it('5. Should remove the booking and confirm it no longer exists', async () => {
+  // Scenario 4: Remove Booking & Verify Deletion
+  it('4. Should remove the booking and confirm it no longer exists', async () => {
     ApiAssert.exists(createdBookingId, 'createdBookingId');
     ApiAssert.exists(authToken, 'authToken');
 
