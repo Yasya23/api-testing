@@ -1,0 +1,17 @@
+{
+  "name": "restful-booker-api-tests",
+  "version": "1.0.0",
+  "description": "Automated API tests for Restful Booker using TypeScript and native Fetch API",
+  "main": "src/tests/booking.test.ts",
+  "type": "module",
+  "scripts": {
+    "start": "node --env-file=.env index.ts",
+    "test": "node --import tsx --test src/**/*.test.ts",
+    "test:local": "node --import tsx --env-file=.env --test src/**/*.test.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.43",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3"
+  }
+}
